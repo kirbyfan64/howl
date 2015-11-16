@@ -134,3 +134,19 @@ command.register
     buffer = app.editor.buffer
     buffer.mode = selected_mode
     log.info "Forced mode '#{selected_mode.name}' for buffer '#{buffer}'"
+
+command.register
+  name: 'goto-line'
+  description: 'Go to the specified line'
+  input: () ->
+    line_str = interact.read_text title: 'Go to line'
+    return tonumber line_str
+
+  handler: (line_no) ->
+    editor = app.editor
+    if line_no < 1
+      line_no = 1
+    if line_no > #editor.buffer.lines
+      line_no = #editor.buffer.lines
+    editor.cursor.line = line_no
+    editor.cursor.column_index = 1
