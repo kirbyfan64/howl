@@ -16,10 +16,10 @@ howl.util.lpeg_lexer ->
     'catch', 'class', 'compl', 'constexpr',
     'const_cast', 'decltype', 'delete', 'dynamic_cast', 'explicit', 'export',
     'friend', 'final', 'mutable', 'namespace', 'new', 'noexcept', 'not_eq',
-    'not', 'nullptr', 'operator', 'or_eq', 'or', 'private', 'protected',
-    'public', 'reinterpret_cast', 'static_assert', 'static_cast', 'template',
-    'this', 'thread_local', 'throw', 'try', 'typeid', 'typename',
-    'union', 'using', 'virtual', 'while', 'xor_eq', 'xor'
+    'not', 'operator', 'or_eq', 'or', 'private', 'protected', 'public',
+    'reinterpret_cast', 'static_assert', 'static_cast', 'template',
+    'thread_local', 'throw', 'try', 'typeid', 'typename', 'union', 'using',
+    'virtual', 'while', 'xor_eq', 'xor'
 
     'auto', 'break', 'case', '_Complex', 'const', 'continue', 'default', 'do',
     'else', 'enum', 'extern', 'for', 'goto', 'if', '_Imaginary', 'inline',
@@ -91,7 +91,7 @@ howl.util.lpeg_lexer ->
   special = c 'special', word {
     'NULL', 'TRUE', 'FALSE', '__FILE__',
     '__LINE__', '__DATE__', '__TIME__', '__TIMESTAMP__',
-    'true', 'false'
+    'this', 'true', 'false', 'nullptr'
   }
 
   string = c 'string', span('"', '"', '\\')

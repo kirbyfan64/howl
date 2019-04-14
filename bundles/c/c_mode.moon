@@ -1,6 +1,7 @@
 -- Copyright 2014-2015 The Howl Developers
 -- License: MIT (see LICENSE.md at the top-level directory of the distribution)
 
+import mode from howl
 append = table.insert
 
 next_relevant_line = (line) ->
@@ -9,6 +10,16 @@ next_relevant_line = (line) ->
     l = l.next
 
   l
+
+merge_tables = (...) ->
+  result = {}
+  index = 1
+  for t in *{...}
+    for item in *t
+      result[index] = item
+      index += 1
+
+  result
 
 {
   lexer: bundle_load('c_lexer')
@@ -22,6 +33,13 @@ next_relevant_line = (line) ->
     '"': '"'
     "'": "'"
   }
+
+  indentation:
+    more_after: merge_tables mode.by_name('curly_mode').indentation.more_after, {
+      r'^\\s*\\b(if|for|while)\\b.*\\)\\s*$'
+      r'^\\s*\\belse\\s*\\bif\\b.*\\)\\s*$'
+      r'\\belse\\s*$'
+    }
 
   structure: (editor) =>
     lines = {}
